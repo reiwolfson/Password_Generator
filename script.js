@@ -28,25 +28,45 @@ function generatePassword(){
 
   var lowercaseChoice = confirm ("Would you like to include lowercase letters?")
   if (lowercaseChoice) {
-    choices.push(lowercase.join(""))
+    choices = choices.concat(lowercase);
   }
 
   var uppercaseChoice = confirm ("Would you like to include uppercase letters?")
   if (uppercaseChoice) {
-    choices.push(uppercase.join(""))
+    choices = choices.concat(uppercase);
   }
 
   var numbersChoice = confirm ("Would you like to include numbers?")
   if (numbersChoice) {
-    choices.push(numbers.join(""))
+    choices = choices.concat(numbers);
   }
 
   var specialChoice = confirm ("Would you like to include special characters?")
   if (specialChoice) {
-    choices.push(special.join(""))
+    choices = choices.concat(special);
   }
 
-  var random = Math.floor(Math.random() * choices.length)
 
-  console.log(random, choices[random]);
+
+  var possible = [];
+  finalPassword = "";
+
+  function randomizer(arr) {
+    var random = Math.floor(Math.random() * arr.length);
+    var item = arr[random];
+    return item
+  }
+
+
+  for (var i = 0; i < choices.length; i++) {
+var randomItem = randomizer(choices);
+possible.push(randomItem);
+  }
+
+ for (var i = 0; i < chosenLength; i++) {
+    var randomItem = randomizer(possible);
+    finalPassword += randomItem;
+  }
+
+return finalPassword;
 }
